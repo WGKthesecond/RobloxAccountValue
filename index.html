@@ -5,31 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Roblox Account Value Viewer</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 40px;
+  /* Reset & basics */
+  * {
+    box-sizing: border-box;
   }
-  input, button {
-    padding: 10px;
-    font-size: 16px;
-    margin: 5px;
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e1e2f;
+    color: #eee;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  p {
+    margin: 0 0 25px 0;
+    font-size: 1.1rem;
+    color: #ccc;
+  }
+  .input-group {
+    display: flex;
+    max-width: 400px;
+    width: 100%;
+  }
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+  button {
+    background: #4b6cb7;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:disabled {
+    background: #8ca1e9;
+    cursor: not-allowed;
+  }
+  button:hover:not(:disabled) {
+    background: #3a53a1;
   }
   #result {
-    margin-top: 30px;
-    white-space: pre-line;
-    font-size: 18px;
+    margin-top: 35px;
+    max-width: 400px;
+    width: 100%;
+    background: #2a2a40;
+    padding: 25px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    white-space: pre-wrap;
+    min-height: 120px;
+    box-shadow: 0 0 10px rgba(75, 108, 183, 0.5);
+  }
+  @media (max-width: 480px) {
+    body {
+      padding: 20px 10px;
+    }
+    .input-group {
+      flex-direction: column;
+    }
+    input[type="text"], button {
+      border-radius: 5px;
+      margin: 5px 0;
+      width: 100%;
+    }
+    #result {
+      font-size: 1rem;
+      padding: 15px;
+      min-height: 100px;
+    }
   }
 </style>
 </head>
 <body>
   <h1>Roblox Account Value Viewer</h1>
-  <p>Enter Roblox Username:</p>
-  <input type="text" id="username" placeholder="e.g. WGKthealt" />
-  <button id="checkBtn">Check Value</button>
-  <div id="result">...</div>
+  <p>Enter a Roblox username below and see their collectible item RAP total!</p>
+
+  <div class="input-group">
+    <input type="text" id="username" placeholder="e.g. WGKthealt" autocomplete="off" />
+    <button id="checkBtn">Check Value</button>
+  </div>
+
+  <div id="result">Enter a username and click "Check Value"</div>
 
   <script src="app.js"></script>
 </body>
 </html>
-
