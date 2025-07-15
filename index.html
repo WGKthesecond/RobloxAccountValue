@@ -1,55 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Roblox Account Value Checker</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
-    input, button { padding: 10px; font-size: 16px; }
-    #result { margin-top: 30px; font-size: 18px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roblox Account Value Viewer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 40px;
+  }
+  input, button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+  }
+  #result {
+    margin-top: 30px;
+    white-space: pre-line;
+    font-size: 18px;
+  }
+</style>
 </head>
 <body>
   <h1>Roblox Account Value Viewer</h1>
-  <p>Enter a Roblox Username:</p>
-  <input type="text" id="username" placeholder="e.g. WGKthealt">
-  <button onclick="getAccountValue()">Check Value</button>
+  <p>Enter Roblox Username:</p>
+  <input type="text" id="username" placeholder="e.g. WGKthealt" />
+  <button id="checkBtn">Check Value</button>
   <div id="result">...</div>
 
-  <script>
-    async function getUserId(username) {
-      const res = await fetch(`https://users.roproxy.com/v1/usernames/users`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usernames: [username] })
-      });
-      const data = await res.json();
-      return data.data[0]?.id;
-    }
-
-    async function getAccountValue() {
-      const username = document.getElementById("username").value;
-      const resultEl = document.getElementById("result");
-      resultEl.innerText = "Fetching user ID...";
-      
-      const userId = await getUserId(username);
-      if (!userId) {
-        resultEl.innerText = "User not found!";
-        return;
-      }
-
-      resultEl.innerText = "Fetching inventory...";
-      const inventoryRes = await fetch(`https://inventory.roproxy.com/v1/users/${userId}/assets/collectibles?limit=100`);
-      const invData = await inventoryRes.json();
-
-      let totalRAP = 0;
-      if (invData.data) {
-        for (const item of invData.data) {
-          totalRAP += item.recentAveragePrice || 0;
-        }
-      }
-
-      resultEl.innerText = `${username}'s Account Value:\nRAP Total: R$${totalRAP.toLocaleString()}`;
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
+
